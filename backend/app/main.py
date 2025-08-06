@@ -1,25 +1,32 @@
-
+# backend/app/main.py (Final Corrected Version with Deployed Frontend URL)
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
 from .api.v1 import endpoints
 
 app = FastAPI(
-    title="Insurance Claim App",
-    description="An advanced API for processing documents and answering natural language queries using Retrieval-Augmented Generation.",
+    title="Insurance Claim Assistant",
+    description="An advanced API for processing documents and answering natural language queries.",
     version="1.0.0",
 )
 
+# --- THIS IS THE FIX ---
+# We have added your live Vercel URL to the list of allowed origins.
+origins = [
+    "https://hack-rx-rho.vercel.app", # Your deployed frontend URL
+    "http://localhost:5173",       # The local URL for development
+    "http://localhost:3000",       # Another common local URL
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allows all origins for development purposes
+    allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],  # Allows all HTTP methods
-    allow_headers=["*"],  # Allows all headers
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
-
+# --- The rest of the file is the same ---
 app.include_router(endpoints.router, prefix="/api/v1")
 
 @app.get("/", tags=["Health Check"])
