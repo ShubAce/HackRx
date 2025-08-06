@@ -386,7 +386,7 @@ const UploadModal = ({ isOpen, onClose, onUploadSuccess, activeChatId }) => {
 		});
 		formData.append("chat_id", activeChatId);
 		try {
-			const response = await axios.post("http://127.0.0.1:8000/api/v1/upload", formData, {
+			const response = await axios.post("https://hackrx-ai-backend.onrender.com/api/v1/upload", formData, {
 				headers: { "Content-Type": "multipart/form-data" },
 			});
 			setSuccessMessage(`${response.data.processed_files.length} file(s) uploaded successfully!`);
