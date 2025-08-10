@@ -19,6 +19,9 @@ import {
 import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
 
+// Use Vite env for API base in production; fallback to local dev
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000";
+
 const LeftPanel = ({ chatHistory, activeChatId, onSelectChat, onNewChat, onDeleteChat, onClose }) => {
 	const [deletingChatId, setDeletingChatId] = useState(null);
 
@@ -801,14 +804,10 @@ const UploadModal = ({ isOpen, onClose, onUploadSuccess, activeChatId }) => {
 		formData.append("chat_id", activeChatId);
 
 		try {
-<<<<<<< HEAD
 			console.log("🚀 Starting upload...");
 			setUploadProgress(0); // Reset progress
 
-			const response = await axios.post("http://127.0.0.1:8000/api/v1/upload", formData, {
-=======
-			const response = await axios.post("https://hackrx-ai-backend.onrender.com/api/v1/upload", formData, {
->>>>>>> cb44b9f9581719560b358efcca780a13fb93fac1
+			const response = await axios.post(`${API_BASE}/api/v1/upload`, formData, {
 				headers: { "Content-Type": "multipart/form-data" },
 				timeout: 120000, // Increased to 2 minutes
 				onUploadProgress: (progressEvent) => {
@@ -1153,7 +1152,7 @@ export default function App() {
 		formData.append("messages_json", JSON.stringify(currentChat.messages));
 		formData.append("chat_id", activeChatId);
 		try {
-			const result = await axios.post('https://hackrx-ai-backend.onrender.com/api/v1/query', formData);
+			const result = await axios.post(`${API_BASE}/api/v1/query`, formData);
 			const apiData = result.data;
 			const aiMessage = { role: "ai", content: apiData.conversational_answer, decision: apiData.decision };
 			setChatHistory((prev) =>
