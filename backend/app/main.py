@@ -20,18 +20,11 @@ origins = [
     "http://localhost:3000",                      # Local dev (alt)
 ]
 
-# Allow Vercel preview deployments (*.vercel.app) using regex
-app.add_middleware(
-    CORSMiddleware,
-    allow_origin_regex=r"https://.*\.vercel\.app",
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
+# Single CORS middleware: allow specific origins + Vercel preview regex
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
+    allow_origin_regex=r"https://.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
