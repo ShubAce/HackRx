@@ -1,11 +1,4 @@
-<<<<<<< HEAD
-
-import os
 from dotenv import load_dotenv
-=======
-# backend/app/main.py (Final Corrected Version with Deployed Frontend URL)
-
->>>>>>> cb44b9f9581719560b358efcca780a13fb93fac1
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from .api.v1 import endpoints
@@ -34,11 +27,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-<<<<<<< HEAD
-=======
-# --- The rest of the file is the same ---
->>>>>>> cb44b9f9581719560b358efcca780a13fb93fac1
 app.include_router(endpoints.router, prefix="/api/v1")
 
 @app.get("/", tags=["Health Check"])
