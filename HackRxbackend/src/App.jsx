@@ -795,7 +795,6 @@ const UploadModal = ({ isOpen, onClose, onUploadSuccess, activeChatId }) => {
 		setError("");
 		setSuccessMessage("");
 		setUploadProgress(0);
-		console.log("🔄 Upload state initialized - isUploading:", true, "uploadProgress:", 0);
 
 		const formData = new FormData();
 		files.forEach((file) => {
@@ -804,7 +803,6 @@ const UploadModal = ({ isOpen, onClose, onUploadSuccess, activeChatId }) => {
 		formData.append("chat_id", activeChatId);
 
 		try {
-			console.log("🚀 Starting upload...");
 			setUploadProgress(0); // Reset progress
 
 			const response = await axios.post(`${API_BASE}/api/v1/upload`, formData, {
@@ -813,13 +811,11 @@ const UploadModal = ({ isOpen, onClose, onUploadSuccess, activeChatId }) => {
 				onUploadProgress: (progressEvent) => {
 					if (progressEvent.total) {
 						const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-						console.log(`📊 Upload progress: ${percentCompleted}%`);
 						setUploadProgress(percentCompleted);
 					}
 				},
 			});
 
-			console.log("✅ Upload successful:", response.data);
 			setSuccessMessage(`${response.data.processed_files.length} file(s) uploaded successfully!`);
 			onUploadSuccess(response.data.processed_files);
 
@@ -828,8 +824,6 @@ const UploadModal = ({ isOpen, onClose, onUploadSuccess, activeChatId }) => {
 				onClose();
 			}, 2000);
 		} catch (err) {
-			console.error("Upload error:", err);
-
 			let errorMessage = "An error occurred during upload. Please try again.";
 
 			if (err.code === "ECONNABORTED") {
@@ -1097,7 +1091,6 @@ export default function App() {
 				startNewChat();
 			}
 		} catch (error) {
-			console.error("Failed to parse chat history", error);
 			startNewChat();
 		}
 		return () => window.removeEventListener("resize", handleResize);

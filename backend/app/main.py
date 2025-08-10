@@ -15,10 +15,19 @@ app = FastAPI(
 # --- THIS IS THE FIX ---
 # We have added your live Vercel URL to the list of allowed origins.
 origins = [
-    "https://hack-rx-rho.vercel.app", # Your deployed frontend URL
-    "http://localhost:5173",       # The local URL for development
-    "http://localhost:3000",       # Another common local URL
+    "https://insurance-claim-virid.vercel.app",  # Your deployed frontend URL
+    "http://localhost:5173",                      # Local dev (Vite)
+    "http://localhost:3000",                      # Local dev (alt)
 ]
+
+# Allow Vercel preview deployments (*.vercel.app) using regex
+app.add_middleware(
+    CORSMiddleware,
+    allow_origin_regex=r"https://.*\.vercel\.app",
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.add_middleware(
     CORSMiddleware,
