@@ -1,14 +1,4 @@
-<<<<<<< HEAD
-docx==0.2.4
-fastapi==0.116.1
-langchain==0.3.27
-langchain_core==0.3.72
-langchain_google_genai==2.1.9
-langchain_pinecone==0.2.11
-PyPDF2==3.0.1
-python-dotenv==1.1.1
-python_docx==1.2.0
-=======
+
 docx
 fastapi
 langchain
@@ -18,7 +8,6 @@ langchain_pinecone
 PyPDF2
 python-dotenv
 python_docx
->>>>>>> cb44b9f9581719560b358efcca780a13fb93fac1
 uvicorn
 gunicorn
 python-multipart
