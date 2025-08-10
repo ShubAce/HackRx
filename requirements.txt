@@ -1,0 +1,12 @@
+docx
+fastapi
+langchain
+langchain_core
+langchain_google_genai
+langchain_pinecone
+PyPDF2
+python-dotenv
+python_docx
+uvicorn
+gunicorn
+python-multipart
